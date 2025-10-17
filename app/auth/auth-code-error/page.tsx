@@ -2,8 +2,8 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Button } from '../../components/ui/button';
-import { GlassCard } from '../../components/ui/glass-card';
+import { Button } from '../../../components/ui/button';
+import { GlassCard } from '../../../components/ui/glass-card';
 import { Trophy, AlertCircle } from 'lucide-react';
 
 const AuthCodeErrorPage = () => {

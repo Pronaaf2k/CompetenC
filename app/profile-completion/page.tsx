@@ -58,6 +58,11 @@ const ProfileCompletionPage = () => {
             return;
         }
 
+        if (!user) {
+            toast.error('User not found. Please sign in again.');
+            return;
+        }
+
         setLoading(true);
         try {
             const profileData = {
