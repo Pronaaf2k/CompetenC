@@ -3,9 +3,13 @@
 import Link from 'next/link';
 import { Button } from './ui/button';
 import { motion } from 'framer-motion';
-import { Trophy } from 'lucide-react';
+import { Trophy, User } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import { LogoutButton } from './LogoutButton';
 
 export const Navbar = () => {
+  const { user, loading } = useAuth();
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -39,12 +43,32 @@ export const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="sm" className="text-gray-700 hover:text-purple-600">
-              Sign In
-            </Button>
-            <Button size="sm" className="gradient-primary text-white hover:opacity-90 transition-opacity">
-              Get Started
-            </Button>
+            {loading ? (
+              <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />
+            ) : user ? (
+              <>
+                <Link href={`/${user.user_metadata?.userType || 'student'}`}>
+                  <Button variant="ghost" size="sm" className="text-gray-700 hover:text-purple-600">
+                    <User className="w-4 h-4 mr-2" />
+                    Dashboard
+                  </Button>
+                </Link>
+                <LogoutButton
+                  variant="ghost"
+                  size="sm"
+                  className="text-gray-700 hover:text-purple-600"
+                />
+              </>
+            ) : (
+              <>
+                <Button variant="ghost" size="sm" className="text-gray-700 hover:text-purple-600">
+                  <Link href="/login">Sign In</Link>
+                </Button>
+                <Button size="sm" className="gradient-primary text-white hover:opacity-90 transition-opacity">
+                  <Link href="/signup">Get Started</Link>
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </div>
