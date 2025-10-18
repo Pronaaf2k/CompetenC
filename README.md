@@ -2,9 +2,12 @@
 
 <div align="center">
 
+<!-- Status Badge: This is a placeholder, as the exact URL for 'Development' might vary -->
 ![Status](https://img.shields.io/badge/status-Development-blue)
-![Stack](https://img.shields.io/badge/stack-Next.js_15_| _Supabase-FF4500)
-![Auth](https://img.shields.io/badge/authentication-Google_OAuth-4285F4?logo=google)
+<!-- Stack Badge: Note: The exact color code 'FF4500' might not map perfectly to the screenshot's purple/orange gradient, but it uses the requested technology stack -->
+![Stack](https://img.shields.io/badge/stack-Next.js%2015%20%7C%20Supabase-7c3aed)
+<!-- Auth Badge: Uses Google's color code for recognition -->
+![Authentication](https://img.shields.io/badge/authentication-Google_OAuth-4285F4?logo=google)
 
 > **Revolutionizing recruitment by leveraging real-world challenges to identify and evaluate top talent.**  
 > CompetenC is a full-stack platform built on the Next.js App Router and Supabase, designed to connect companies with skilled students through gamified competition.
@@ -57,73 +60,3 @@ cd competenc-nextjs
 
 # Install dependencies
 npm install
-```
-
-### 2. Environment Configuration
-
-Create a `.env.local` file in the root directory and populate it with your Supabase credentials:
-
-```env
-# Mandatory Supabase connection details
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-
-# Used for middleware/server actions
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
-
-# Used by Next.js/middleware for JWT handling (can be any long random string)
-NEXTAUTH_SECRET=a_very_long_random_secret_key
-```
-
-### 3. Database & Auth Setup
-
-Follow the detailed instructions in the [SUPABASE_SETUP.md](./SUPABASE_SETUP.md) document to configure:
-1.  Supabase Google OAuth Provider.
-2.  Run the necessary table creation scripts (`supabase-schema.sql`).
-3.  Ensure the Auth Redirect URLs are correctly set for both local development (`http://localhost:3000/auth/callback`) and production.
-
-### 4. Run the Application
-
-```sh
-npm run dev
-```
-The application should now be accessible at `http://localhost:3000`.
-
----
-
-## 🗺️ Core Application Structure
-
-The application is heavily structured by user role and functional area using Next.js App Router conventions:
-
-| Route Path | Associated User Role | Description |
-| :--- | :--- | :--- |
-| `/` | Public | Marketing landing page and general navigation. |
-| `/login`, `/signup` | Public | Authentication entry points (Google OAuth). |
-| `/auth/callback` | Middleware | Handles Supabase redirection and initiates profile completion check. |
-| `/profile-completion` | All (Onboarding) | Required step post-signup to select user role (Student/Company). |
-| `/student` | Student | Primary dashboard, tracks user metrics (points, rank). |
-| `/student/explore` | Student | Directory to view and apply for active challenges. |
-| `/company` | Company | Company dashboard overview and key metrics (applicants, hires). |
-| `/company/create` | Company | Form for creating and posting new challenges. |
-| `/company/applicants` | Company | Management view for reviewing student submissions. |
-| `/admin` | Admin | Internal administration dashboard for system oversight. |
-
-### Database Schema (`supabase-schema.sql`)
-
-The backend model is built around three core tables linked by foreign keys and secured with RLS:
-
-1.  **`profiles`**: Stores detailed user information (user type, university, company name).
-2.  **`challenges`**: Stores competition details posted by companies.
-3.  **`submissions`**: Stores student responses to challenges, including scores and feedback.
-
----
-
-## 👤 Development Team
-
-| Name                  | Role             | Contact                                                                                      |
-|-----------------------|------------------|---------------------------------------------------------------------------------------------|
-| **Samiyeel Alim Binaaf** | Project Lead/Developer | [![GitHub](https://img.shields.io/badge/-Pronaaf2k-181717?style=flat&logo=github&logoColor=white)](https://github.com/Pronaaf2k) |
-
----
-*Inspired by the real necessity for better skill-based hiring systems.*
-</div>
