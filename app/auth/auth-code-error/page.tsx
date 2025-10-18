@@ -5,8 +5,12 @@ import Link from 'next/link';
 import { Button } from '../../../components/ui/button';
 import { GlassCard } from '../../../components/ui/glass-card';
 import { Trophy, AlertCircle } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
 
 const AuthCodeErrorPage = () => {
+    const searchParams = useSearchParams();
+    const customMessage = searchParams.get('message');
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-purple-50 flex items-center justify-center p-4">
             <motion.div
@@ -21,11 +25,11 @@ const AuthCodeErrorPage = () => {
                     </div>
 
                     <h1 className="text-2xl font-heading font-bold text-gray-900 mb-4">
-                        Authentication Error
+                        {customMessage ? 'Role Mismatch' : 'Authentication Error'}
                     </h1>
 
                     <p className="text-gray-600 mb-8">
-                        There was an error with the authentication process. This could be due to an invalid or expired link.
+                        {customMessage || 'There was an error with the authentication process. This could be due to an invalid or expired link.'}
                     </p>
 
                     <div className="space-y-4">

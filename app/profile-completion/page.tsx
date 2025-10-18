@@ -38,6 +38,16 @@ const ProfileCompletionPage = () => {
             router.push(`/${user.user_metadata.userType}`);
             return;
         }
+
+        // Check for pre-selected role from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const preSelectedRole = urlParams.get('role');
+        if (preSelectedRole && (preSelectedRole === 'student' || preSelectedRole === 'company')) {
+            setFormData(prev => ({
+                ...prev,
+                userType: preSelectedRole
+            }));
+        }
     }, [user, router]);
 
     const handleSubmit = async (e: React.FormEvent) => {

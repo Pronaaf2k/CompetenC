@@ -37,7 +37,7 @@ export async function middleware(request: NextRequest) {
 
     // Protected routes
     const protectedRoutes = ['/student', '/company', '/admin']
-    const authRoutes = ['/login', '/signup']
+    const authRoutes = ['/login', '/signup', '/login/student', '/login/company']
     const profileCompletionRoute = '/profile-completion'
 
     const isProtectedRoute = protectedRoutes.some(route =>

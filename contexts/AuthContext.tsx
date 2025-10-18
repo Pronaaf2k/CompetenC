@@ -10,8 +10,8 @@ type AuthContextType = {
     loading: boolean
     signUp: (email: string, password: string, userData?: any) => Promise<any>
     signIn: (email: string, password: string) => Promise<any>
-    signInWithGoogle: () => Promise<any>
-    signUpWithGoogle: () => Promise<any>
+    signInWithGoogle: (role?: string) => Promise<any>
+    signUpWithGoogle: (role?: string) => Promise<any>
     signOut: () => Promise<void>
 }
 
@@ -69,25 +69,34 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         await supabase.auth.signOut()
     }
 
-    const signInWithGoogle = async () => {
+    const signInWithGoogle = async (role?: string) => {
+        const redirectUrl = role
+            ? `${window.location.origin}/auth/callback?role=${role}`
+            : `${window.location.origin}/auth/callback`
+
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: `${window.location.origin}/auth/callback`
+                redirectTo: redirectUrl
             }
         })
         return { data, error }
     }
 
-    const signUpWithGoogle = async () => {
+    const signUpWithGoogle = async (role?: string) => {
+        const redirectUrl = role
+            ? `${window.location.origin}/auth/callback?role=${role}`
+            : `${window.location.origin}/auth/callback`
+
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: `${window.location.origin}/auth/callback`
+                redirectTo: redirectUrl
             }
         })
         return { data, error }
     }
+
 
     const value = {
         user,
